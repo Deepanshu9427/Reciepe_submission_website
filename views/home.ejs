@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../output/styles.css">
+  <title>Foodie Recipes</title>
+</head>
+<body class="min-h-screen">
+  <section class=" bg-bottom bg-cover h-[60vh] flex flex-col " style="background-image: url('image/40923.jpg');">
+    <nav class="flex  justify-end mt-3  ">
+        <div class="flex justify-between text-sm font-bold text-white w-1/4 max-[1100px]:w-1/3 max-[800px]:text-xs max-[600px]:w-1/2 mr-5 max-[800px]:mr-2">
+             <div class="flex flex-col w-8 ">
+              <a href="/"  class="flex flex-col justify-center items-center " ><img src="../image/icons8-home-50.png" alt="Home" id="home" class="h-6 filter invert max-[1100px]:h-5 max-[800px]:h-4 "></a>
+              <p id="home2" class="h-4 max-[1100px]:h-3"></p>
+             </div>
+             <div class="flex flex-col w-8 " >
+              <a href="/login" class="flex flex-col justify-center items-center " target="_blank" ><img src="../image/icons8-login-64.png" alt="Login" id="login" class="h-6 filter invert max-[1100px]:h-5 max-[800px]:h-4 "></a> 
+              <p id="login2" class="h-4 max-[1100px]:h-3"></p>   
+             </div>
+             <div class="flex flex-col w-8 ">
+              <a href="/registration" class="flex flex-col justify-center items-center " ><img src="../image/icons8-register-50.png" alt="Register" id="register" class="h-6 filter invert max-[1100px]:h-5 max-[800px]:h-4 "></a>
+              <p id="register2" class="h-4 max-[1100px]:h-3"></p>
+             </div>
+             <div class="flex flex-col w-8 ">
+              <a href="/contact" class="flex flex-col justify-center items-center " target="_blank"><img src="../image/icons8-contact-64.png" alt="Contact" id="contact" class="h-6 filter invert max-[1100px]:h-5 max-[800px]:h-4 "></a>
+              <p id="contact2" class="h-4 max-[1100px]:h-3"></p>
+             </div>
+             <div class="flex flex-col w-8 ">
+              <a href="/about" class="flex flex-col justify-center items-center " target="_blank"><img src="../image/icons8-about-us-50.png" alt="About Us" id="aboutus" class="h-6 filter invert max-[1100px]:h-5 max-[800px]:h-4 "></a>
+              <p id="aboutus2" class="h-4 max-[1100px]:h-3"></p>
+             </div>    
+        </div>      
+    </nav>
+    <div class="  font-bold text-2xl flex flex-col justify-center items-center text-white max-[1023px]:mt-8  max-[865px]:mt-28 ">
+          <p class="text-black font-extrabold">HUNGRY??? </p>
+          <p class="max-[443px]:text-lg">EXPLORE</p>
+          <P class="max-[443px]:text-lg">THE BEST RECIPIES</P>
+          <p class="max-[822px]:text-lg max-[445px]:text-sm">INDIAN | CONTINENTAL | CHINESE | ITALIAN | .....</p>
+    </div>
+    <div class=" flex flex-col justify-center items-center mt-28">
+          <form action="/search" method="post" class=" w-3/5 max-[645px]:w-3/4 " >
+              <input type="text" placeholder="search" name="search" required class="w-full rounded-xl h-10 px-4 focus:outline-none ">
+          </form>
+    </div>
+  </section> 
+  <section>
+    <% if ( recipesnames) { %>
+      <div class=" flex  justify-center items-center mt-4 w-full">
+        <p class="text-gray-700 text-xl font-extrabold max-[443px]:text-lg">Best Results for "<%= search%>"</p>
+     </div> 
+    <% } %> 
+    <div class="flex justify-start overflow-x-auto items-center w-full p-4">  
+       
+      <% if ( p && recipesnames.length==0 ) { %>
+        <div class=" flex  justify-center items-center w-full mt-4">
+          <p class="text-gray-700 text-lg font-extrabold max-[443px]:text-md">No Matching Recipes</p>
+       </div> 
+      <% } %>    
+      <% if (recipesnames) { %>
+        <div class="flex space-x-3 ">
+          <% recipesnames.forEach(name => { %>
+            <div class="bg-white rounded-lg shadow-md flex flex-col justify-center mx-3 w-[350px] ">
+               <img src="data:<%= name.contentType %>;base64,<%= name.data.toString('base64') %>" alt="photo" class="object-cover h-44 rounded-md mb-4">
+              <h3 class="text-xl  flex justify-center  font-bold mb-2 max-[443px]:text-lg"><%= name.reciepe_name %></h3>
+              <a href="/recipe?id=<%= name._id %>" target="_blank" class="text-orange-500  flex justify-center  hover:underline">Read More</a>
+            </div> 
+            <% }) %>
+        </div>
+     <% } %> 
+      
+    </div>
+  </section>
+   <!-- Featured Recipes Section -->
+   <section >
+    <div class="flex flex-col w-full">
+      <div class="flex justify-center items-center">
+        <h1 class="text-2xl font-extrabold my-3 max-[443px]:text-lg">Recently Shared recipes..</h1>
+      </div>
+      <div class="flex justify-start items-center w-full p-4 max-[672px]:flex-col ">  
+       
+        <% if (!recentRecipes) { %>
+          <div class="bg-white rounded-lg shadow-md flex border-2 border-black justify-center items-center h-40 w-1/4 mx-3">
+            <p class="text-gray-700 text-lg font-extrabold max-[443px]:text-lg">Nothing Shared Yet</p>
+         </div> 
+        <% } %>    
+        <% if (recentRecipes) { %>
+          
+          <% recentRecipes.forEach(recipe => { %>
+            <div class="bg-white rounded-lg shadow-md flex flex-col justify-center mx-3 w-1/3 max-[672px]:w-10/12  max-[672px]:my-3 max-[672px]:mx-0">
+               <img src="data:<%= recipe.contentType %>;base64,<%= recipe.data.toString('base64') %>" alt="photo" class="object-cover h-44 rounded-md ">
+              <h3 class="text-xl  flex justify-center  font-bold mb-2 max-[443px]:text-lg"><%= recipe.reciepe_name %></h3>
+              <a href="/recipe?id=<%= recipe._id %>" target="_blank" class="text-orange-500  flex justify-center  hover:underline">Read More</a>
+            </div> 
+            <% }) %>
+        
+       <% } %> 
+        
+      </div>
+    </div>  
+  </section>
+  <!-- Footer -->
+  <footer class="bg-gray-800 text-white text-center py-4">
+    <p>&copy; 2023 Foodie Recipes. All rights reserved.</p>
+  </footer>
+  <script src="homescript.js"></script>
+</body>
+</html>

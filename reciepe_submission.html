@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./output/styles.css">
+    <title>Document</title>
+</head>
+<body class="bg-no-repeat bg-cover bg-center font-pacifico min-h-screen flex justify-center items-center  " style="background-image: url('image/spring-background-with-plate-flowers.jpg');" >
+      
+    <form method="post" class=" flex flex-col w-2/3 justify-around  ">
+        <div class=" flex justify-center items-center  w-full">
+            <h1 class="font-extrabold  text-2xl text-white">SHARE YOUR RECIEPE</h1>
+        </div>
+        <div class="flex flex-col  w-full">
+            <div class="mb-4">
+                <label for="RecipeName" class="block text-md font-medium text-gray-600">Recipe Name</label>
+                <input type="text" id="recipeName" name="recipeName" placeholder="Enter the name of reciepe " class="mt-1 p-2 w-full border rounded-xl">
+            </div>
+            <div class="mb-4"> 
+                <label for="Ingredients" class="block text-md font-medium text-gray-600">Ingredients</label>
+                <textarea id="ingredients" placeholder="List the ingredients" name="ingredients" rows="4" class="mt-1 p-2 w-full border rounded-xl"></textarea>
+            </div>
+    
+            <div class="mb-4">
+                <label for="Instructions"  class="block text-md font-medium text-gray-600">Instructions</label>
+                <textarea id="instructions" placeholder="Mention the instructions" name="instructions" rows="6" class="mt-1 p-2 w-full border rounded-xl"></textarea>
+            </div>
+        </div>
+        <button type="button" class="bg-blue-500 text-white p-2 rounded-xl hover:bg-blue-200">Submit Recipe</button>
+    </form>
+</body>
+</html>

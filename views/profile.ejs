@@ -1,0 +1,97 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= username %></title>
+  <link rel="stylesheet" href="../output/styles.css">
+</head>
+<body class=" flex min-h-screen max-[400px]:flex-col">
+
+  <!-- Sidebar -->
+  <div class="flex justify-center w-1/6 bg-gray-500 max-[400px]:w-full ">
+    <div class="flex flex-col    mt-6 max-[400px]:my-2">
+      <div class="flex flex-col justify-center items-center">
+        <% if (image) { %>
+          <img src="data:<%= image.contentType %>;base64,<%= image.data.toString('base64') %>" alt="photo" class="w-16 h-16  border bg-white mb-2 rounded-full">
+        <% } %>
+        <!--<img src="../image/icons8-person-48.png" alt="Photo" class="w-16 h-16  border bg-white border-yellow-300 mb-2 rounded-full">-->
+        <p class="text-md flex justify-center font-semibold  mt-2  text-gray-800"><%= username %></p>  
+      </div>
+        <a href="/edit?username=<%= username %>" class="bg-purple-600 hover:bg-purple-300 flex justify-center w-full mt-2 rounded-md">edit</a>
+       
+      <!-- Add form to change username and profile photo here -->
+    </div>
+
+  </div>
+
+  <!-- Main Content -->
+  <div class=" flex flex-col w-5/6  max-[400px]:w-full">
+    <div class="flex flex-col w-full  ">
+      <div class="flex justify-center items-center">
+        <h1 class="text-2xl font-extrabold">recently shared recipes..</h1>
+      </div>
+      <div class="flex justify-start overflow-x-auto items-center w-full p-4 ">  
+       
+        <% if (!recentRecipes) { %>
+          <div class="bg-white rounded-lg shadow-md flex border-2 border-black justify-center items-center h-44 w-64 mx-3">
+            <p class="text-gray-700 text-lg font-extrabold">Nothing Shared Yet</p>
+         </div> 
+        <% } %>    
+        <% if (recentRecipes) { %>
+          <div class="flex space-x-3">
+            <% recentRecipes.forEach(recipe => { %>
+              <div class="bg-white rounded-lg shadow-md flex flex-col justify-center mx-3 w-[350px] ">
+                 <img src="data:<%= recipe.contentType %>;base64,<%= recipe.data.toString('base64') %>" alt="photo" class="object-cover h-44 rounded-md mb-4">
+                <h3 class="text-xl  flex justify-center  font-bold mb-2"><%= recipe.reciepe_name %></h3>
+                <a href="/recipe?id=<%= recipe._id %>" target="_blank" class="text-orange-500  flex justify-center  hover:underline">Read More</a>
+              </div> 
+              <% }) %>
+          </div>
+         
+       <% } %> 
+        
+        <% if (recentRecipes && p) { %>
+          
+           <a href="/all_recipes?username=<%= username %>" class="text-orange-500  flex justify-center mx-4 hover:underline">Show All</a>
+         
+        <% } %> 
+      </div>
+    </div>
+       <div class=" font-bold text-2xl ">
+        
+        <div class="bg-no-repeat bg-cover bg-center font-pacifico min-h-screen flex justify-center  items-center min-w-screen  " style="background-image: url('./image/spring-background-with-plate-flowers.jpg');" >
+      
+            <form action="/reciepe?username=<%= username %>" method="post" enctype="multipart/form-data" class=" flex flex-col w-2/3 max-[740px]:w-11/12 justify-around">
+                <div class=" flex justify-center items-center  w-full">
+                    <h1 class="font-extrabold  text-2xl text-white">SHARE YOUR RECIEPE</h1>
+                </div>
+                <div class="flex flex-col  w-full">
+                    <div class="mb-4">
+                      <label for="image" class="block text-md font-medium text-gray-600">Snapshot</label>
+                      <input type="file" name="image" accept="image/*" required class=" mt-1 p-2 text-sm w-full border rounded-xl">
+                    </div>
+                    <div class="mb-4">
+                        <label for="RecipeName" class="block text-md font-medium text-gray-600">Recipe Name</label>
+                        <input type="text" id="recipeName" name="recipeName" placeholder="Enter the name of reciepe " required class="mt-1 p-2 text-sm w-full border rounded-xl">
+                    </div>
+                    <div class="mb-4"> 
+                        <label for="Ingredients" class="block text-md font-medium text-gray-600">Ingredients</label>
+                        <textarea id="ingredients" placeholder="List the ingredients" name="ingredients" rows="4" required class="mt-1 p-2 w-full text-sm border rounded-xl"></textarea>
+                    </div>
+            
+                    <div class="mb-4">
+                        <label for="Instructions"  class="block text-md font-medium text-gray-600">Instructions</label>
+                        <textarea id="instructions" placeholder="Mention the instructions" name="instructions" rows="6" required class="mt-1 p-2 w-full text-sm border rounded-xl"></textarea>
+                    </div>
+                </div>
+                <button type="submit" class="bg-blue-500 text-white p-2 rounded-xl hover:bg-blue-200">Submit Recipe</button>
+            </form>
+        </div>     
+    </div>
+    
+  </div>
+   
+</body>
+</html>

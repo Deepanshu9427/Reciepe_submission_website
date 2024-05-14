@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../output/styles.css">
+    <title><%= recipe.reciepe_name %></title>
+</head>
+<body class="flex justify-center bg-gray-300  min-h-screen">
+    <div class="bg-white rounded-lg shadow-md flex flex-col items-center  w-3/4 my-3 ">
+        <div class="w-10/12 flex justify-start">
+            <img src="data:<%= recipe.contentType %>;base64,<%= recipe.data.toString('base64') %>" alt="photo" class="object-cover h-60 w-60 rounded-md my-3">
+        </div>
+        <div class="flex flex-col justify-center  w-10/12 ">
+            <label for="RecipeName" class="block text-xl font-medium text-gray-600">Recipe Name</label>
+            <h3 class="text-md text-black font-bold"><%= recipe.reciepe_name %></h3>
+            <label for="Ingredients" class="block text-xl font-medium text-gray-600">Ingredients</label>
+            <p class="text-md text-black"><%= recipe.ingredients %></p>
+            <label for="Instructions"  class="block text-xl font-medium text-gray-600">Instructions</label>
+            <p class="text-md text-black"><%= recipe.instructions %></p>
+        </div>
+    </div>
+</body>
+</html>
